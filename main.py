@@ -3,8 +3,10 @@ from machine import ADC
 from machine import Timer
 
 adc1 = ADC(Pin(26)) 
-adc2 = ADC(Pin(27))
+
 adc3 = ADC(Pin(28))
+digitalIn = Pin(15, Pin.IN) # inicializando el pin 15 como entrada digital
+led = Pin("LED", Pin.OUT) # inicializando el led integrado como salida digital
 
 period = 1000
 
@@ -21,7 +23,7 @@ def get_adc_values():
     global b_value  
 
     adcVal1 = int((adc1.read_u16() - 2000) / 600)
-    adcVal2 = int((adc2.read_u16() - 2000) / 600)
+    adcVal2 = digitalIn.value()
     adcVal3 = int((adc3.read_u16() - 2000) / 600)
     
     if adcVal1 > 100 :
@@ -152,8 +154,10 @@ def web_page():
             <body>
                 <h1>Raspberry Pi Pico W Web Server</h1>
                 <p>Medici&oacute;n de sensores</p>
-            
-            
+                <p><i> One Man Army Team </i> </p>
+                <img src="https://hips.hearstapps.com/hmg-prod.s3.amazonaws.com/images/rambo-acorralado-sylvestre-stallone-1566292817.jpg" alt="rambo" width="500" height="600">                
+                <p>Pino Alvarez Oscar Brandon - 17210622 </p>
+                <a href="https://github.com/oscarxpino/Pico-W-webserver-3sensores">Link del repositorio</a>
                 <table>
                     <tbody>
                         <tr>
@@ -161,7 +165,7 @@ def web_page():
                                 <p><a href="/update"><button class="ButtonR Button">Sensor 1</button></a></p>
                             </td>
                             <td>
-                                <strong> """+ r_value +""" %</strong>
+                                <strong>El valor del potenciometro es:  """+ r_value +""" %</strong>
                                 <meter id="fuel" min="0" max="100" low="30" high="70" optimum="80" value=" @@"""+ r_value +""" @@">
                                     at 50/100
                                 </meter>
@@ -172,8 +176,7 @@ def web_page():
                                 <p><a href="/update"><button class="ButtonG Button">Sensor 2</button></a></p>
                             </td>
                             <td>
-                                <strong> """+ g_value +""" %</strong>
-                                <meter id="fuel" min="0" max="100" low="30" high="70" optimum="80" value=" @@"""+ g_value +""" @@">
+                                <strong> El valor del switch es: """+ g_value +""" %</strong>
                                     at 50/100
                                 </meter>
                             </td>
@@ -183,7 +186,7 @@ def web_page():
                                 <p><a href="/update"><button class="ButtonB Button">Sensor 3</button></a></p>
                             </td>
                             <td>
-                                <strong> """+ b_value +""" %</strong>
+                                <strong>El valor de la fotoresistencia es:  """+ b_value +""" %</strong>
                                 <meter id="fuel" min="0" max="100" low="30" high="70" optimum="80" value=" @@"""+ b_value +""" @@">
                                     at 50/100
                                 </meter>
@@ -192,7 +195,7 @@ def web_page():
                         <tr>
                             <td colspan="2">
                                 <center>
-                                    <img src="https://brandslogos.com/wp-content/uploads/images/large/raspberry-pi-logo.png" alt="Logo Raspberry Pi" width="150" height="150">
+                                    <img src="http://drive.google.com/uc?export=view&id=1b0pAs2Gl0bY1pBU1dywA14xvyeS0ence" alt="Logo Raspberry Pi" width="90" height="120">
                                 </center>
                             </td>
                         </tr> 
